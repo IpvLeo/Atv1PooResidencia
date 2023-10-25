@@ -101,11 +101,11 @@ class ListaSalarios  {
 	public:
 	//funsao para ver quantidade de salario da lista
 	void entradaDeDados() {
-    int numElementos;
+    int ElementosSalario;
     cout << "Quantos salários existirão na lista? ";
-    cin >> numElementos;
+    cin >> ElementosSalario;
 
-    for (int i = 0; i < numElementos; i++) {
+    for (int i = 0; i < ElementosSalario; i++) {
         float salario;
         cout << "Digite o salário " << i + 1 << ": ";
         cin >> salario;
