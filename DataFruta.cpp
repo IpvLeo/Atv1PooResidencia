@@ -12,11 +12,45 @@ class Data {
 	O m�todo abaixo retornar� -1 se d1 � anterior a d2
 	Retornar� 0 se d1 = d2
 	Retornar� +1 se d1 � posterior a d2
-	*/	
-	static int compara(Data d1, Data d2) { 
-		return 0;
-	}
-	
+	*/
+		static int compara(const Data &d1, const Data &d2)
+		{
+			if (d1.ano < d2.ano)
+			{
+				return -1; // d1 é menor que d2
+			}
+			else if (d1.ano > d2.ano)
+			{
+				return 1; // d1 é maior que d2
+			}
+			else
+			{ // Os anos são iguais
+				if (d1.mes < d2.mes)
+				{
+					return -1; // o mes de d1 é menor q d2
+				}
+				else if (d1.mes > d2.mes)
+				{
+					return 1; // d1 é maior que d2
+				}
+				else
+				{ // Os anos e meses são iguais
+					if (d1.dia < d2.dia)
+					{
+						return -1; // o dia de d1 é menor que o d2
+					}
+					else if (d1.dia > d2.dia)
+					{
+						return 1; // o dia de d1 é maior que o d2
+					}
+					else
+					{ // As datas são iguais
+						return 0;
+					}
+				}
+			}
+		}
+
 	Data (int _dia, int _mes, int _ano) {
 		dia = _dia;
 		mes = _mes;
