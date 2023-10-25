@@ -102,12 +102,12 @@ class ListaSalarios  {
 	//funsao para ver quantidade de salario da lista
 	void entradaDeDados() {
         int ElementosSalario;
-        cout << "Quantos salários existirão na lista? ";
+        cout << "Quantos salários existirao na lista? ";
         cin >> ElementosSalario;
 
         for (int i = 0; i < ElementosSalario; i++) {
             double salario;
-            cout << "Digite o salário " << i + 1 << ": ";
+            cout << "Digite o salario " << i + 1 << ": ";
             cin >> salario;
             lista.push_back(salario);
         }
@@ -123,21 +123,21 @@ class ListaSalarios  {
         if (tamanho % 2 == 0) {
         // Se a quantidade de salários for par, média das duas do meio.
             double mediana = (lista[tamanho / 2 - 1] + lista[tamanho / 2]) / 2.0;
-            std::cout << "Mediana dos salários: " << mediana << endl;
+            cout << "Mediana dos salarios: " << mediana << endl;
         } else {
         // Se a quantidade de salários for ímpar, pegue o do meio.
             double mediana = lista[tamanho / 2];
-            std::cout << "Mediana dos salários: " << mediana << endl;
+            cout << "Mediana dos salarios: " << mediana << endl;
         }
     }
 	
 //funsao para mostrar o menor salario	
 	void mostraMenor() {
 		 if (lista.empty()) {
-            cout << "A lista de salários está vazia." << endl;
+            cout << "A lista de salarios esta vazia." << endl;
         } else {
             // funsao para inicializar com o maior valor possível 
-            double menorSalario = numeric_limits<float>::max(); 
+            double menorSalario = numeric_limits<double>::max(); 
 
             // funsao para encontre o menor salário na lista
             for (double salario : lista) {
@@ -146,46 +146,86 @@ class ListaSalarios  {
                 }
             }
 
-            cout << "Menor salário: " << menorSalario << endl;
+            cout << "Menor salario: " << menorSalario << endl;
         }
     }
     //funsao para mostrar o maior salario
 	void mostraMaior() {
 		 if (lista.empty()) {
-            cout << "A lista de salários está vazia." << endl;
+            cout << "A lista de salarios esta vazia." << endl;
         } else {
             // funsao para encontra o maior salário .
             double maiorSalario = *max_element(lista.begin(), lista.end());
-            cout << "Maior salário: " << maiorSalario << endl;
+            cout << "Maior salario: " << maiorSalario << endl;
         }
     }
 };
 
 
 class ListaIdades  {
-	vector<int> lista;
+	vector<double> lista;
 	
 	public:
-		
-		/*
-	O m�todo abaixo pergunta ao usu�rios quantos
-	elementos v�o existir na lista e depois
-	solicita a digita��o de cada um deles
-	*/	
+	//funsao para ver quantidade de idades da lista
 	void entradaDeDados() {
-		
-	}
+        int ElementosIdade;
+        cout << "Quantos salarios existirao na lista? ";
+        cin >> ElementosIdade;
+
+        for (int i = 0; i < ElementosIdade; i++) {
+            double idade;
+            cout << "Digite o salario " << i + 1 << ": ";
+            cin >> idade;
+            lista.push_back(idade);
+        }
+    }
+//funsao para mostrar a mediana da lista de idades
+    void mostraMediana() {
+
+        //funsao para ordenar idades.
+        sort(lista.begin(), lista.end());
+
+        int tamanho = lista.size();
+
+        if (tamanho % 2 == 0) {
+        // Se a quantidade de salários for par, média das duas do meio.
+            double mediana = (lista[tamanho / 2 - 1] + lista[tamanho / 2]) / 2.0;
+            cout << "Mediana das idades: " << mediana << endl;
+        } else {
+        // Se a quantidade de salários for ímpar, pegue o do meio.
+            double mediana = lista[tamanho / 2];
+            cout << "Mediana das idades: " << mediana << endl;
+        }
+    }
 	
-	void mostraMediana() {
-		cout << "Aqui vai mostrar a mediana da lista de idades" << endl;
-	}
-	
+//funsao para mostrar o menor idade	
 	void mostraMenor() {
-		cout << "Aqui vai mostrar a menor das idades" << endl;
-	}
+		 if (lista.empty()) {
+            cout << "A lista de idades esta vazia." << endl;
+        } else {
+            // funsao para inicializar com o maior valor possível 
+            double menorIdade = numeric_limits<double>::max(); 
+
+            // funsao para encontre o menor salário na lista
+            for (double idade : lista) {
+                if (idade < menorIdade) {
+                    menorIdade = idade;
+                }
+            }
+
+            cout << "Menor idade: " << menorIdade << endl;
+        }
+    }
+    //funsao para mostrar o maior salario
 	void mostraMaior() {
-		cout << "aqui vai mostrar a maior das idades" << endl;
-	}
+		 if (lista.empty()) {
+            cout << "A lista de idades esta vazia." << endl;
+        } else {
+            // funsao para encontra o maior salário .
+            double maiorIdade = *max_element(lista.begin(), lista.end());
+            cout << "Maior idade: " << maiorIdade << endl;
+        }
+    }
 };
  
 int main () {
