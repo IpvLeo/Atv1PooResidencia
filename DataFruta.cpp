@@ -95,12 +95,12 @@ class ListaDatas  {
 	}
 };
 
-class ListaSalarios  {
+class ListaSalarios : public Lista {
 	vector<double> lista;
 	
 	public:
 	//funsao para ver quantidade de salario da lista
-	void entradaDeDados() {
+	void entradaDeDados() override {
         int ElementosSalario;
         cout << "Quantos salários existirao na lista? ";
         cin >> ElementosSalario;
@@ -113,7 +113,7 @@ class ListaSalarios  {
         }
     }
 //funsao para mostrar a mediana da lista de salarios
-    void mostraMediana() {
+    void mostraMediana() override {
 
         //funsao para ordenar salarios.
         sort(lista.begin(), lista.end());
@@ -132,7 +132,7 @@ class ListaSalarios  {
     }
 	
 //funsao para mostrar o menor salario	
-	void mostraMenor() {
+	void mostraMenor() override {
 		 if (lista.empty()) {
             cout << "A lista de salarios esta vazia." << endl;
         } else {
@@ -150,7 +150,7 @@ class ListaSalarios  {
         }
     }
     //funsao para mostrar o maior salario
-	void mostraMaior() {
+	void mostraMaior() override {
 		 if (lista.empty()) {
             cout << "A lista de salarios esta vazia." << endl;
         } else {
@@ -162,12 +162,12 @@ class ListaSalarios  {
 };
 
 
-class ListaIdades  {
+class ListaIdades : public Lista{ 
 	vector<double> lista;
 	
 	public:
 	//funsao para ver quantidade de idades da lista
-	void entradaDeDados() {
+	void entradaDeDados() override {
         int ElementosIdade;
         cout << "Quantas idades existirao na lista? ";
         cin >> ElementosIdade;
@@ -180,7 +180,7 @@ class ListaIdades  {
         }
     }
 //funsao para mostrar a mediana da lista de idades
-    void mostraMediana() {
+    void mostraMediana() override {
 
         //funsao para ordenar idades.
         sort(lista.begin(), lista.end());
@@ -199,7 +199,7 @@ class ListaIdades  {
     }
 	
 //funsao para mostrar o menor idade	
-	void mostraMenor() {
+	void mostraMenor() override {
 		 if (lista.empty()) {
             cout << "A lista de idades esta vazia." << endl;
         } else {
@@ -217,7 +217,7 @@ class ListaIdades  {
         }
     }
     //funsao para mostrar a maior idade
-	void mostraMaior() {
+	void mostraMaior() override {
 		 if (lista.empty()) {
             cout << "A lista de idades esta vazia." << endl;
         } else {
@@ -239,20 +239,21 @@ int main () {
 	listaDatas.entradaDeDados();
 	listaDeListas.push_back(&listaDatas);
 	
-	ListaSalarios listaSalarios;
-	listaSalarios.entradaDeDados();
-	listaDeListas.push_back(&listaSalarios);
+	ListaSalarios* listaSalarios = new ListaSalarios;  
+	listaSalarios->entradaDeDados();
+	listaDeListas.push_back(listaSalarios);
 	
-	ListaIdades listaIdades;
-	listaIdades.entradaDeDados();
-	listaDeListas.push_back(&listaIdades);
+	ListaIdades* listaIdades = new ListaIdades;
+	listaIdades->entradaDeDados();
+	listaDeListas.push_back(listaIdades);
 	
 	for (Lista* l : listaDeListas) {
 		l->mostraMediana();
 		l->mostraMenor();
 		l->mostraMaior();
 	}
-	
+	 // Limpando memória
+    for (Lista* l : listaDeListas) {
+        delete l;
+    }
 }
-    
-
