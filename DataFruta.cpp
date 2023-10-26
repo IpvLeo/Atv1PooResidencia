@@ -87,12 +87,41 @@ class ListaNomes : public Lista {
 	elementos v�o existir na lista e depois
 	solicita a digita��o de cada um deles
 	*/	
-	void entradaDeDados() {
-		lista.push_back("Teste");
+		void entradaDeDados() override
+	{
+		int nElementos;
+		cout << "Quantos elementos vão existir na sua lista? ";
+		cin >> nElementos;
+
+		for (int i = 0; i < nElementos; i++)
+		{
+			string nome;
+			cout << "Digite o nome " << i + 1 << ": ";
+			cin >> nome;
+			lista.push_back(nome);
+		}
+		sort(lista.begin(), lista.end());
 	}
-		
-	void mostraMediana() {
-		cout << "Aqui vai mostrar a mediana da lista de strings" << endl;
+
+	void mostraMediana() override
+	 {
+    int tamanho = lista.size();
+    if (tamanho == 0) {
+        cout << "A lista está vazia. Não é possível calcular a mediana." << endl;
+    } else {
+        // Ordene a lista
+        sort(lista.begin(), lista.end());
+
+        if (tamanho % 2 == 0) {
+            // Tamanho par, calcular a mediana dos dois elementos do meio
+            string mediana1 = lista[tamanho / 2 - 1];
+            string mediana2 = lista[tamanho / 2];
+            cout << "Mediana: " << mediana1 << " e " << mediana2 << endl;
+        } else {
+            // Tamanho ímpar, exibir o nome no meio da lista
+            cout << "Mediana: " << lista[tamanho / 2] << endl;
+        }
+    }
 	}
 	
 	void mostraMenor() {
