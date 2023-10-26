@@ -123,11 +123,11 @@ class ListaSalarios : public Lista {
         if (tamanho % 2 == 0) {
         // Se a quantidade de salários for par, média das duas do meio.
             double mediana = (lista[tamanho / 2 - 1] + lista[tamanho / 2]) / 2.0;
-            cout << "Mediana dos salarios: " << mediana << endl;
+            cout <<endl<< "Mediana dos salarios: " << mediana << endl;
         } else {
         // Se a quantidade de salários for ímpar, pegue o do meio.
             double mediana = lista[tamanho / 2];
-            cout << "Mediana dos salarios: " << mediana << endl;
+            cout <<endl<< "Mediana dos salarios: " << mediana <<endl;
         }
     }
 	
@@ -157,6 +157,7 @@ class ListaSalarios : public Lista {
             // funsao para encontra o maior salário .
             double maiorSalario = *max_element(lista.begin(), lista.end());
             cout << "Maior salario: " << maiorSalario << endl;
+			cout<<"-------------------------------"<<endl;
         }
     }
 };
@@ -224,6 +225,7 @@ class ListaIdades : public Lista{
             // funsao para encontra a maior idade .
             double maiorIdade = *max_element(lista.begin(), lista.end());
             cout << "Maior idade: " << maiorIdade << endl;
+			cout<<"-------------------------------"<<endl;
         }
     }
 };
