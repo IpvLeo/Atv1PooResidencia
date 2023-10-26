@@ -37,7 +37,7 @@ estrutura hierárquica de classes!
 Como se não fosse o bastante, eles também não implementaram 
 nenhum dos métodos estatísticos; os que estão ali apenas 
 exibem uma mensagem genérica.
-------------------------------------------------------------
+
 
 ## Seu trabalho.
 
