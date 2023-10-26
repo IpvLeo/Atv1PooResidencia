@@ -43,7 +43,7 @@ class Lista {
 	virtual void mostraMaior() =0;
 };
 
-class ListaNomes {
+class ListaNomes : public Lista {
 	vector<string> lista;
 	
 	public:
@@ -69,7 +69,7 @@ class ListaNomes {
 	}
 };
 
-class ListaDatas  {
+class ListaDatas : public Lista {
 	vector<Data> lista;
 	
 	public:
@@ -231,13 +231,13 @@ class ListaIdades : public Lista{
 int main () {
 	vector<Lista*> listaDeListas;
 	
-	ListaNomes listaNomes;
-	listaNomes.entradaDeDados();
-	listaDeListas.push_back(&listaNomes);
+	ListaNomes* listaNomes = new ListaNomes;
+	listaNomes->entradaDeDados();
+	listaDeListas.push_back(listaNomes);
 	
-	ListaDatas listaDatas;
-	listaDatas.entradaDeDados();
-	listaDeListas.push_back(&listaDatas);
+	ListaDatas* listaDatas = new ListaDatas;
+	listaDatas->entradaDeDados();
+	listaDeListas.push_back(listaDatas);
 	
 	ListaSalarios* listaSalarios = new ListaSalarios;  
 	listaSalarios->entradaDeDados();
