@@ -169,12 +169,12 @@ class ListaIdades  {
 	//funsao para ver quantidade de idades da lista
 	void entradaDeDados() {
         int ElementosIdade;
-        cout << "Quantos salarios existirao na lista? ";
+        cout << "Quantas idades existirao na lista? ";
         cin >> ElementosIdade;
 
         for (int i = 0; i < ElementosIdade; i++) {
             double idade;
-            cout << "Digite o salario " << i + 1 << ": ";
+            cout << "Digite a idade " << i + 1 << ": ";
             cin >> idade;
             lista.push_back(idade);
         }
@@ -188,11 +188,11 @@ class ListaIdades  {
         int tamanho = lista.size();
 
         if (tamanho % 2 == 0) {
-        // Se a quantidade de salários for par, média das duas do meio.
+        // Se a quantidade de idades for par, média das duas do meio.
             double mediana = (lista[tamanho / 2 - 1] + lista[tamanho / 2]) / 2.0;
             cout << "Mediana das idades: " << mediana << endl;
         } else {
-        // Se a quantidade de salários for ímpar, pegue o do meio.
+        // Se a quantidade de idades for ímpar, pegue o do meio.
             double mediana = lista[tamanho / 2];
             cout << "Mediana das idades: " << mediana << endl;
         }
@@ -206,7 +206,7 @@ class ListaIdades  {
             // funsao para inicializar com o maior valor possível 
             double menorIdade = numeric_limits<double>::max(); 
 
-            // funsao para encontre o menor salário na lista
+            // funsao para encontre a menor idade na lista
             for (double idade : lista) {
                 if (idade < menorIdade) {
                     menorIdade = idade;
@@ -216,12 +216,12 @@ class ListaIdades  {
             cout << "Menor idade: " << menorIdade << endl;
         }
     }
-    //funsao para mostrar o maior salario
+    //funsao para mostrar a maior idade
 	void mostraMaior() {
 		 if (lista.empty()) {
             cout << "A lista de idades esta vazia." << endl;
         } else {
-            // funsao para encontra o maior salário .
+            // funsao para encontra a maior idade .
             double maiorIdade = *max_element(lista.begin(), lista.end());
             cout << "Maior idade: " << maiorIdade << endl;
         }
