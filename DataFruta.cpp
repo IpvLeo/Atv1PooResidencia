@@ -125,10 +125,12 @@ class ListaNomes : public Lista {
 	}
 	
 	void mostraMenor() {
-		cout << "Aqui vai mostrar o primeiro nome alfabeticamente" << endl;
+		lista.size();
+		cout << "A menor posicao na lista: " << lista.back() << endl;
 	}
 	void mostraMaior() {
-		cout << "aqui vai mostrar o ultimo nome alfabeticamente" << endl;
+		lista.size();
+		cout << "A maior posicao na lista: " << lista.front() << endl;
 	}
 };
 
