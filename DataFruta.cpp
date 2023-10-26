@@ -267,21 +267,21 @@ class ListaIdades : public Lista{
 int main () {
 	vector<Lista*> listaDeListas;
 	
-	ListaNomes* listaNomes = new ListaNomes;
-	listaNomes->entradaDeDados();
-	listaDeListas.push_back(listaNomes);
+	ListaNomes listaNomes;
+	listaNomes.entradaDeDados();
+	listaDeListas.push_back(&listaNomes);
 	
-	ListaDatas* listaDatas = new ListaDatas;
-	listaDatas->entradaDeDados();
-	listaDeListas.push_back(listaDatas);
+	ListaDatas listaDatas;
+	listaDatas.entradaDeDados();
+	listaDeListas.push_back(&listaDatas);
 	
-	ListaSalarios* listaSalarios = new ListaSalarios;  
-	listaSalarios->entradaDeDados();
-	listaDeListas.push_back(listaSalarios);
+	ListaSalarios listaSalarios;
+	listaSalarios.entradaDeDados();
+	listaDeListas.push_back(&listaSalarios);
 	
-	ListaIdades* listaIdades = new ListaIdades;
-	listaIdades->entradaDeDados();
-	listaDeListas.push_back(listaIdades);
+	ListaIdades listaIdades;
+	listaIdades.entradaDeDados();
+	listaDeListas.push_back(&listaIdades);
 	
 	for (Lista* l : listaDeListas) {
 		l->mostraMediana();
