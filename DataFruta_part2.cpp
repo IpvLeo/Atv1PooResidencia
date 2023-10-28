@@ -97,33 +97,32 @@ public:
 
     void mostraMediana() {
         if (lista.empty()) {
-            cout <<endl<< "A lista de nomes esta vazia." << endl;
+            cout << "A lista de nomes está vazia." << endl;
             return;
         }
 
         sort(lista.begin(), lista.end());
 
         int meio = lista.size() / 2;
-        cout <<endl<< "Mediana dos nomes: " << lista[meio] << endl;
+        cout << "Mediana: " << lista[meio] << endl;
     }
 
     void mostraMenor() {
         if (lista.empty()) {
-            cout << "A lista de nomes esta vazia." << endl;
+            cout << "A lista de nomes está vazia." << endl;
             return;
         }
 
-        cout << "Menor nome em ordem alfabetica: " << *min_element(lista.begin(), lista.end()) << endl;
+        cout << "Menor nome em ordem alfabética: " << *min_element(lista.begin(), lista.end()) << endl;
     }
 
     void mostraMaior() {
         if (lista.empty()) {
-            cout << "A lista de nomes esta vazia." << endl;
+            cout << "A lista de nomes está vazia." << endl;
             return;
         }
 
-        cout << "Maior nome em ordem alfabetica: " << *max_element(lista.begin(), lista.end()) << endl;
-        cout<<"-------------------------------"<<endl;
+        cout << "Maior nome em ordem alfabética: " << *max_element(lista.begin(), lista.end()) << endl;
     }
 };
 
@@ -138,31 +137,18 @@ class ListaDatas : public Lista {
 	solicita a digita��o de cada um deles
 	*/	
 	void entradaDeDados() {
-		int ElementosData;
-		int dia,mes,ano;
-		cout<<"Quantos elementos tera na lista de datas? : ";cin>>ElementosData;
-		for(int i=0;i<ElementosData;i++){
-			cout<<"Digite o dia da "<<i+1<<" data: ";cin>>dia;
-			cout<<"Digite o mes da "<<i+1<<" data: ";cin>>mes;
-			cout<<"Digite o ano da "<<i+1<<" data: ";cin>>ano;
-			Data data(dia,mes,ano);
-			lista.push_back(data);
-		}
+		
 	}
 	
 	void mostraMediana() {
 		cout << "Aqui vai mostrar a mediana da lista de datas" << endl;
-        
-        
 	}
 	
 	void mostraMenor() {
 		cout << "Aqui vai mostrar a primeira data cronologicamente" << endl;
-        
 	}
 	void mostraMaior() {
 		cout << "aqui vai mostrar a ultima data cronologicamente" << endl;
-        cout<<"-------------------------------";
 	}
 };
 
@@ -173,7 +159,7 @@ class ListaSalarios : public Lista {
 	//funsao para ver quantidade de salario da lista
 	void entradaDeDados() override {
         int ElementosSalario;
-        cout << "Quantos salarios existirao na lista? ";
+        cout << "Quantos salários existirao na lista? ";
         cin >> ElementosSalario;
 
         for (int i = 0; i < ElementosSalario; i++) {
@@ -331,4 +317,4 @@ int main () {
     }
 }
 
-//fazendo um teste
+//fazendo outro teste
