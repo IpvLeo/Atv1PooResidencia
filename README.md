@@ -1,4 +1,4 @@
-"# Atv1PooResidencia" 
+Prova 2 - Poo Residencia
 
 ## ATIVIDADE 2. Parte 1. Prática em Polimorfismo, Classes Abstratas e Interfaces
 
