@@ -128,30 +128,55 @@ public:
 };
 
 class ListaDatas : public Lista {
-	vector<Data> lista;
-	
-	public:
-		
-	/*
-	O m�todo abaixo pergunta ao usu�rios quantos
-	elementos v�o existir na lista e depois
-	solicita a digita��o de cada um deles
-	*/	
-	void entradaDeDados() {
-		
-	}
-	
-	void mostraMediana() {
-		cout << "Aqui vai mostrar a mediana da lista de datas" << endl;
-	}
-	
-	void mostraMenor() {
-		cout << "Aqui vai mostrar a primeira data cronologicamente" << endl;
-	}
-	void mostraMaior() {
-		cout << "aqui vai mostrar a ultima data cronologicamente" << endl;
-        cout<<"-------------------------------"<<endl;
-	}
+    vector<Data> lista;
+
+public:
+    void entradaDeDados() override {
+        int n;
+        cout << "Quantas datas deseja inserir na lista? ";
+        cin >> n;
+
+        for (int i = 0; i < n; i++) {
+            int dia, mes, ano;
+            cout << "Digite a data " << i + 1 << " (DD MM AAAA): ";
+            cin >> dia >> mes >> ano;
+            Data data(dia, mes, ano);
+            lista.push_back(data);
+        }
+    }
+
+    void mostraMediana() override {
+        if (lista.empty()) {
+            cout << "A lista de datas esta vazia." << endl;
+            return;
+        }
+
+        sort(lista.begin(), lista.end(), Data::compara);
+
+        int meio = lista.size() / 2;
+        cout << "Mediana das datas: " << lista[meio].toString() << endl;
+    }
+
+    void mostraMenor() override {
+        if (lista.empty()) {
+            cout << "A lista de datas está vazia." << endl;
+            return;
+        }
+
+        sort(lista.begin(), lista.end(), Data::compara);
+        cout << "Primeira data cronologicamente: " << lista[0].toString() << endl;
+    }
+
+    void mostraMaior() override {
+        if (lista.empty()) {
+            cout << "A lista de datas está vazia." << endl;
+            return;
+        }
+
+        sort(lista.begin(), lista.end(), Data::compara);
+        cout << "Última data cronologicamente: " << lista.back().toString() << endl;
+        cout << "-------------------------------" << endl;
+    }
 };
 
 class ListaSalarios : public Lista {
