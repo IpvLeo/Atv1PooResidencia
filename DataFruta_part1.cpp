@@ -330,5 +330,3 @@ int main () {
         delete l;
     }
 }
-
-//sei la se isso vai da certo
