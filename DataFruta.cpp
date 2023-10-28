@@ -78,29 +78,52 @@ class Lista {
 };
 
 class ListaNomes : public Lista {
-	vector<string> lista;
-	
-	public:
-	
-	/*
-	O m�todo abaixo pergunta ao usu�rios quantos
-	elementos v�o existir na lista e depois
-	solicita a digita��o de cada um deles
-	*/	
-	void entradaDeDados() {
-		lista.push_back("Teste");
-	}
-		
-	void mostraMediana() {
-		cout << "Aqui vai mostrar a mediana da lista de strings" << endl;
-	}
-	
-	void mostraMenor() {
-		cout << "Aqui vai mostrar o primeiro nome alfabeticamente" << endl;
-	}
-	void mostraMaior() {
-		cout << "aqui vai mostrar o ultimo nome alfabeticamente" << endl;
-	}
+    vector<string> lista;
+
+public:
+    void entradaDeDados() override {
+        int n;
+        cout << "Quantos nomes deseja inserir na lista? ";
+        cin >> n;
+        cin.ignore(); // Limpar o buffer do teclado
+
+        for (int i = 0; i < n; i++) {
+            string nome;
+            cout << "Digite o nome " << i + 1 << ": ";
+            getline(cin, nome);
+            lista.push_back(nome);
+        }
+    }
+
+    void mostraMediana() {
+        if (lista.empty()) {
+            cout << "A lista de nomes está vazia." << endl;
+            return;
+        }
+
+        sort(lista.begin(), lista.end());
+
+        int meio = lista.size() / 2;
+        cout << "Mediana: " << lista[meio] << endl;
+    }
+
+    void mostraMenor() {
+        if (lista.empty()) {
+            cout << "A lista de nomes está vazia." << endl;
+            return;
+        }
+
+        cout << "Menor nome em ordem alfabética: " << *min_element(lista.begin(), lista.end()) << endl;
+    }
+
+    void mostraMaior() {
+        if (lista.empty()) {
+            cout << "A lista de nomes está vazia." << endl;
+            return;
+        }
+
+        cout << "Maior nome em ordem alfabética: " << *max_element(lista.begin(), lista.end()) << endl;
+    }
 };
 
 class ListaDatas : public Lista {
