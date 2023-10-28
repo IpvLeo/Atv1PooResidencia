@@ -9,9 +9,9 @@ class Data {
 	public:
 	
 	/*
-	O método abaixo retornará -1 se d1 á anterior a d2
-	Retornará 0 se d1 = d2
-	Retornará +1 se d1 á posterior a d2
+	O m�todo abaixo retornar� -1 se d1 � anterior a d2
+	Retornar� 0 se d1 = d2
+	Retornar� +1 se d1 � posterior a d2
 	*/	
 	static int compara(Data d1, Data d2) { 
 		return 0;
@@ -41,29 +41,18 @@ class Lista {
 	virtual void mostraMaior() =0;
 };
 
-class ListaNomes : public Lista {
+class ListaNomes {
 	vector<string> lista;
 	
 	public:
 	
 	/*
-	O método abaixo pergunta ao usuários quantos
-	elementos vão existir na lista e depois
-	solicita a digitação de cada um deles
+	O m�todo abaixo pergunta ao usu�rios quantos
+	elementos v�o existir na lista e depois
+	solicita a digita��o de cada um deles
 	*/	
-	void entradaDeDados() override {
-		int n;
-		string nm;
-		cout <<"Deseja inserir quantos nomes? " << endl;
-		cin >> n;
-		for (int i = 0; i < n; i++)
-		{
-			cout << "Digite o nome:" << endl;
-			getline (cin>>ws, nm);
-			lista.push_back(nm);
-		}
-		
-		
+	void entradaDeDados() {
+		lista.push_back("Teste");
 	}
 		
 	void mostraMediana() {
@@ -159,14 +148,12 @@ class ListaIdades  {
  
 int main () {
 	vector<Lista*> listaDeListas;
-	Data dataum (12,9,2013);
-	Data datadois (15,8,2023);
-	cout << Data ::compara (dataum, datadois) << endl;
+	
 	ListaNomes listaNomes;
 	listaNomes.entradaDeDados();
 	listaDeListas.push_back(&listaNomes);
 	
-	/*ListaDatas listaDatas;
+	ListaDatas listaDatas;
 	listaDatas.entradaDeDados();
 	listaDeListas.push_back(&listaDatas);
 	
@@ -182,7 +169,8 @@ int main () {
 		l->mostraMediana();
 		l->mostraMenor();
 		l->mostraMaior();
-	}*/
+	}
 	
 }
     
+
