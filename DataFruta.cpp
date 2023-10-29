@@ -174,7 +174,7 @@ public:
         }
 
         sort(lista.begin(), lista.end(), Data::compara);
-        cout << "Última data cronologicamente: " << lista.back().toString() << endl;
+        cout << "Ultima data cronologicamente: " << lista.back().toString() << endl;
         cout << "-------------------------------" << endl;
     }
 };
