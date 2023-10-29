@@ -113,13 +113,35 @@ class ListaNomes : public Lista {
 	}
 	
 	void mostraMenor() {
-		lista.size();
-		cout << "A menor posicao na lista: " << lista.back() << endl;
-	}
+    if (lista.empty()) {
+        cout << "A lista de nomes está vazia." << endl;
+    } else {
+        string mNome = lista[0]; // Comece com o primeiro nome
+        for (const string &nome : lista) {
+            if (nome < mNome) {
+                mNome = nome;
+            }
+        }
+        cout << "Menor nome: " << mNome << endl;
+    }
+}
+
 	void mostraMaior() {
-		lista.size();
-		cout << "A maior posicao na lista: " << lista.front() << endl;
-	}
+    if (lista.empty()) {
+        cout << "A lista de nomes está vazia." << endl;
+    } else {
+        string maNome = lista[0]; // Comece com o primeiro nome
+
+        for (const string &nome : lista) {
+            if (nome > maNome) {
+                maNome = nome;
+            }
+        }
+
+        cout << "Maior nome: " << maNome << endl;
+    }
+}
+
 	void listarEmOrdem() override {
         if (lista.empty()) {
             cout << "A lista de nomes esta vazia." << endl;
