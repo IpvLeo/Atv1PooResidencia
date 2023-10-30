@@ -167,6 +167,7 @@ class ListaDatas : public Lista {
 	solicita a digita��o de cada um deles
 	*/	
 	public:
+    //metodo para entrada de datas
     void entradaDeDados() override {
         int n;
         cout << "Quantas datas deseja inserir na lista? ";
@@ -180,53 +181,54 @@ class ListaDatas : public Lista {
             lista.push_back(data);
         }
     }
-
+    //metodo para imprimir a media das datas
     void mostraMediana() override {
         if (lista.empty()) {
-            cout << "A lista de datas esta vazia." << endl;
+            cout << "A lista de datas está vazia." << endl;
             return;
         }
 
-        sort(lista.begin(), lista.end(), Data::compara);
-
+        sort(lista.begin(), lista.end());
         int meio = lista.size() / 2;
         cout << "Mediana das datas: " << lista[meio].toString() << endl;
     }
-
+    //metodo para imprimir a menor data
     void mostraMenor() override {
         if (lista.empty()) {
             cout << "A lista de datas está vazia." << endl;
             return;
         }
 
-        sort(lista.begin(), lista.end(), Data::compara);
-        cout << "Primeira data cronologicamente: " << lista[0].toString() << endl;
+        auto minmax = minmax_element(lista.begin(), lista.end());
+        cout << "Primeira data cronologicamente: " << minmax.first->toString() << endl;
     }
-
+    //metodo para imprimir a maior data
     void mostraMaior() override {
         if (lista.empty()) {
             cout << "A lista de datas está vazia." << endl;
             return;
         }
 
-        sort(lista.begin(), lista.end(), Data::compara);
-        cout << "Ultima data cronologicamente: " << lista.back().toString() << endl;
+        auto minmax = minmax_element(lista.begin(), lista.end());
+        cout << "Ultima data cronologicamente: " << minmax.second->toString() << endl;
         cout << "-------------------------------" << endl;
     }
-
+    //metodo para organizar de forma cronologica
     void listarEmOrdem() override {
         if (lista.empty()) {
             cout << "A lista de datas está vazia." << endl;
             return;
         }
 
-        sort(lista.begin(), lista.end(), Data::compara);
+        sort(lista.begin(), lista.end());
         cout << "Datas em ordem:" << endl;
         for (const Data &data : lista) {
             cout << data.toString() << endl;
         }
     }
 };
+    
+
 
 class ListaSalarios : public Lista {
 	vector<double> lista;
