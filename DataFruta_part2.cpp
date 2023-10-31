@@ -219,7 +219,7 @@ class ListaDatas : public Lista {
         }
 
         sort(lista.begin(), lista.end(), Data::compara);
-        cout << "Ultima data: " << lista.back().toString() << endl;
+         cout << "Última data: " << lista[lista.size() - 1].toString() << endl;
         cout << "                                   " << endl;
     }
 
