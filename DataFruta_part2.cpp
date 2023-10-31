@@ -6,59 +6,18 @@
 
 using namespace std;
 
+// Classe para representar uma data
 class Data {
 	int dia, mes, ano;
 	public:
 	
-	/*
-	O m�todo abaixo retornar� -1 se d1 � anterior a d2
-	Retornar� 0 se d1 = d2
-	Retornar� +1 se d1 � posterior a d2
-	*/
-		static int compara(const Data &d1, const Data &d2)
-		{
-			if (d1.ano < d2.ano)
-			{
-				return -1; // d1 é menor que d2
-			}
-			else if (d1.ano > d2.ano)
-			{
-				return 1; // d1 é maior que d2
-			}
-			else
-			{ // Os anos são iguais
-				if (d1.mes < d2.mes)
-				{
-					return -1; // o mes de d1 é menor q d2
-				}
-				else if (d1.mes > d2.mes)
-				{
-					return 1; // d1 é maior que d2
-				}
-				else
-				{ // Os anos e meses são iguais
-					if (d1.dia < d2.dia)
-					{
-						return -1; // o dia de d1 é menor que o d2
-					}
-					else if (d1.dia > d2.dia)
-					{
-						return 1; // o dia de d1 é maior que o d2
-					}
-					else
-					{ // As datas são iguais
-						return 0;
-					}
-				}
-			}
-		}
 
 	Data (int _dia, int _mes, int _ano) {
 		dia = _dia;
 		mes = _mes;
 		ano = _ano;
 	}
-	string toString() {
+	string toString() const {
 		string ret = "";
 		ret.append(to_string(dia));
 		ret.append("/");
@@ -67,70 +26,158 @@ class Data {
 		ret.append(to_string(ano));
 		return ret;
 	}
+
+// Método estático para comparar duas datas
+ static int compara(const Data &d1, const Data &d2) {
+        if (d1.ano < d2.ano) {
+            return -1;
+        } else if (d1.ano > d2.ano) {
+            return 1;
+        } else {
+            if (d1.mes < d2.mes) {
+                return -1;
+            } else if (d1.mes > d2.mes) {
+                return 1;
+            } else {
+                if (d1.dia < d2.dia) {
+                    return -1;
+                } else if (d1.dia > d2.dia) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        }
+    }
+
+    bool operator<(const Data &outra) const {
+        return compara(*this, outra) < 0;
+	}
 };
 
+
+// Interface para uma lista genérica
 class Lista {
 	public:
 	virtual void entradaDeDados() =0;
 	virtual void mostraMediana() =0;
 	virtual void mostraMenor() =0;
 	virtual void mostraMaior() =0;
+	virtual void listarEmOrdem() =0;
+    virtual void NPrimeiros(int N) = 0;
 };
 
+// Classe para uma lista de nomes
 class ListaNomes : public Lista {
-    vector<string> lista;
+	vector<string> lista;
+	
+	public:
+	
+	/*
+	O m�todo abaixo pergunta ao usu�rios quantos
+	elementos v�o existir na lista e depois
+	solicita a digita��o de cada um deles
+	*/	
+		void entradaDeDados() override
+	{
+		int nElementos;
+		cout << "Quantos nomes vao existir na sua lista? ";
+		cin >> nElementos;
 
-public:
-    void entradaDeDados() override {
-        int n;
-        cout << endl<<"Quantos nomes deseja inserir na lista? ";
-        cin >> n;
-        cin.ignore(); // Limpar o buffer do teclado
+		for (int i = 0; i < nElementos; i++)
+		{
+			string nome;
+			cout << "Digite o nome " << i + 1 << ": ";
+			cin >> nome;
+			lista.push_back(nome);
+		}
+		sort(lista.begin(), lista.end());
+	}
 
-        for (int i = 0; i < n; i++) {
-            string nome;
-            cout << "Digite o nome " << i + 1 << ": ";
-            getline(cin, nome);
-            lista.push_back(nome);
+	void mostraMediana() override
+	 {
+    int tamanho = lista.size();
+    if (tamanho == 0) {
+        cout << "A lista está vazia. Não é possível calcular a mediana." << endl;
+    } else {
+        // Ordene a lista
+        sort(lista.begin(), lista.end());
+
+        if (tamanho % 2 == 0) {
+            // Tamanho par, calcular a mediana dos dois elementos do meio
+            string mediana1 = lista[tamanho / 2 - 1];
+            string mediana2 = lista[tamanho / 2];
+            cout <<endl<< "Mediana: " << mediana1 << " e " << mediana2 << endl;
+        } else {
+            // Tamanho ímpar, exibir o nome no meio da lista
+            cout <<endl<< "Mediana: " << lista[tamanho / 2] << endl;
         }
     }
+	}
+	
+	void mostraMenor() {
+    if (lista.empty()) {
+        cout << "A lista de nomes está vazia." << endl;
+    } else {
+        string mNome = lista[0]; // Comece com o primeiro nome
+        for (const string &nome : lista) {
+            if (nome < mNome) {
+                mNome = nome;
+            }
+        }
+        cout << "Menor nome: " << mNome << endl;
+    }
+}
 
-    void mostraMediana() {
+	void mostraMaior() {
+    if (lista.empty()) {
+        cout << "A lista de nomes está vazia." << endl;
+    } else {
+        string maNome = lista[0]; // Comece com o primeiro nome
+
+        for (const string &nome : lista) {
+            if (nome > maNome) {
+                maNome = nome;
+            }
+        }
+
+        cout << "Maior nome: " << maNome << endl;
+        cout << "                                   " << endl;
+    }
+}
+
+	void listarEmOrdem() override {
         if (lista.empty()) {
             cout << "A lista de nomes esta vazia." << endl;
             return;
         }
 
         sort(lista.begin(), lista.end());
-
-        int meio = lista.size() / 2;
-        cout <<endl<< "Mediana dos nomes: " << lista[meio] << endl;
-    }
-
-    void mostraMenor() {
-        if (lista.empty()) {
-            cout << "A lista de nomes esta vazia." << endl;
-            return;
+        cout << "Nomes em ordem:" << endl;
+        for (const string &nome : lista) {
+            cout << nome << endl;
         }
-
-        cout << "Menor nome em ordem alfabetica: " << *min_element(lista.begin(), lista.end()) << endl;
     }
-
-    void mostraMaior() {
-        if (lista.empty()) {
-            cout << "A lista de nomes esta vazia." << endl;
-            return;
+    void NPrimeiros(int N) override {
+        cout << "Os primeiros " << N << " nomes sao:" << endl;
+        for (int i = 0; i < N && i < lista.size(); i++) {
+            cout << lista[i] << endl;
         }
-
-        cout << "Maior nome em ordem alfabetica: " << *max_element(lista.begin(), lista.end()) << endl;
         cout<<"-------------------------------"<<endl;
     }
 };
-
+// Classe para uma lista de Data
 class ListaDatas : public Lista {
-    vector<Data> lista;
-
-public:
+	vector<Data> lista;
+	
+	public:
+		
+	/*
+	O m�todo abaixo pergunta ao usu�rios quantos
+	elementos v�o existir na lista e depois
+	solicita a digita��o de cada um deles
+	*/	
+	public:
     void entradaDeDados() override {
         int n;
         cout << "Quantas datas deseja inserir na lista? ";
@@ -154,31 +201,53 @@ public:
         sort(lista.begin(), lista.end(), Data::compara);
 
         int meio = lista.size() / 2;
-        cout << "Mediana das datas: " << lista[meio].toString() << endl;
+        cout <<endl<<"Mediana das datas: " << lista[meio].toString() << endl;
     }
 
     void mostraMenor() override {
         if (lista.empty()) {
-            cout << "A lista de datas está vazia." << endl;
+            cout << "A lista de datas esta vazia." << endl;
             return;
         }
 
         sort(lista.begin(), lista.end(), Data::compara);
-        cout << "Primeira data cronologicamente: " << lista[0].toString() << endl;
+        cout << "Primeira data: " << lista[0].toString() << endl;
     }
 
     void mostraMaior() override {
         if (lista.empty()) {
-            cout << "A lista de datas está vazia." << endl;
+            cout << "A lista de datas esta vazia." << endl;
             return;
         }
 
         sort(lista.begin(), lista.end(), Data::compara);
-        cout << "Ultima data cronologicamente: " << lista.back().toString() << endl;
-        cout << "-------------------------------" << endl;
+         cout << "Última data: " << lista[lista.size() - 1].toString() << endl;
+        cout << "                                   " << endl;
     }
-};
 
+    void listarEmOrdem() override {
+        if (lista.empty()) {
+            cout << "A lista de datas esta vazia." << endl;
+            return;
+        }
+
+        sort(lista.begin(), lista.end(), Data::compara);
+        cout << "Datas em ordem:" << endl;
+        for (const Data &data : lista) {
+            cout << data.toString() << endl;
+        }
+    }
+    void NPrimeiros(int N) override {
+        
+        cout << "As primeiras " << N << " datas sao:" << endl;
+        for (int i = 0; i < N && i < lista.size(); i++) {
+            cout << lista[i].toString() << endl;
+        }
+        cout<<"-------------------------------"<<endl;
+    }
+   
+};
+// Classe para uma lista de Salarios
 class ListaSalarios : public Lista {
 	vector<double> lista;
 	
@@ -207,7 +276,7 @@ class ListaSalarios : public Lista {
         if (tamanho % 2 == 0) {
         // Se a quantidade de salários for par, média das duas do meio.
             double mediana = (lista[tamanho / 2 - 1] + lista[tamanho / 2]) / 2.0;
-            cout << "Mediana dos salarios: " << mediana << endl;
+            cout <<endl<< "Mediana dos salarios: " << mediana << endl;
         } else {
         // Se a quantidade de salários for ímpar, pegue o do meio.
             double mediana = lista[tamanho / 2];
@@ -241,12 +310,31 @@ class ListaSalarios : public Lista {
             // funsao para encontra o maior salário .
             double maiorSalario = *max_element(lista.begin(), lista.end());
             cout << "Maior salario: " << maiorSalario << endl;
-			cout<<"-------------------------------"<<endl;
+			cout<<"                                 "<<endl;
         }
+    }
+	void listarEmOrdem() override {
+        if (lista.empty()) {
+            cout << "A lista de salarios esta vazia." << endl;
+            return;
+        }
+
+        sort(lista.begin(), lista.end());
+        cout << "Salarios em ordem:" << endl;
+        for (double salario : lista) {
+            cout << salario << endl;
+        }
+    }
+     void NPrimeiros(int N) override {
+        cout << "Os primeiros " << N << " salarios sao:" << endl;
+        for (int i = 0; i < N && i < lista.size(); i++) {
+            cout << lista[i] << endl;
+        }
+        cout<<"-------------------------------"<<endl;
     }
 };
 
-
+// Classe para uma lista de Idade
 class ListaIdades : public Lista{ 
 	vector<double> lista;
 	
@@ -275,11 +363,11 @@ class ListaIdades : public Lista{
         if (tamanho % 2 == 0) {
         // Se a quantidade de idades for par, média das duas do meio.
             double mediana = (lista[tamanho / 2 - 1] + lista[tamanho / 2]) / 2.0;
-            cout << "Mediana das idades: " << mediana << endl;
+            cout <<endl<< "Mediana das idades: " << mediana << endl;
         } else {
         // Se a quantidade de idades for ímpar, pegue o do meio.
             double mediana = lista[tamanho / 2];
-            cout << "Mediana das idades: " << mediana << endl;
+            cout <<endl<< "Mediana das idades: " << mediana << endl;
         }
     }
 	
@@ -309,9 +397,30 @@ class ListaIdades : public Lista{
             // funsao para encontra a maior idade .
             double maiorIdade = *max_element(lista.begin(), lista.end());
             cout << "Maior idade: " << maiorIdade << endl;
-			cout<<"-------------------------------"<<endl;
+			cout<<"                     "<<endl;
         }
     }
+
+	void listarEmOrdem() override {
+        if (lista.empty()) {
+            cout << "A lista de idades está vazia." << endl;
+            return;
+        }
+
+        sort(lista.begin(), lista.end());
+        cout << "Idades em ordem:" << endl;
+        for (double idade : lista) {
+            cout << idade << endl;
+        }
+    }
+    void NPrimeiros(int N) override {
+        cout << "As primeiras " << N << " idades sao:" << endl;
+        for (int i = 0; i < N && i < lista.size(); i++) {
+            cout << lista[i] << endl;
+        }
+        cout<<"-------------------------------"<<endl;
+    }
+   
 };
  
 int main () {
@@ -337,6 +446,8 @@ int main () {
 		l->mostraMediana();
 		l->mostraMenor();
 		l->mostraMaior();
+        l->listarEmOrdem();
+        l->NPrimeiros(5);//mostrar os 5 primeiros elementos de cada lista
 	}
 	 // Limpando memória
     for (Lista* l : listaDeListas) {
